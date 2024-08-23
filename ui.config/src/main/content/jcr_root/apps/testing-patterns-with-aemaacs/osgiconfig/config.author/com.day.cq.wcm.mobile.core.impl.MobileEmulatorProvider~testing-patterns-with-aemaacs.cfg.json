@@ -1,0 +1,6 @@
+{
+  "mobile.resourceTypes": [
+    "testing-patterns-with-aemaacs/components/page"
+  ],
+  "README": "Indicate which page resource types should display the mobile emulators."
+}
