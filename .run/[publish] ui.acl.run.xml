@@ -1,0 +1,41 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="[publish] ui.acl" type="MavenRunConfiguration" factoryName="Maven">
+        <MavenSettings>
+            <option name="myGeneralSettings"/>
+            <option name="myRunnerSettings"/>
+            <option name="myRunnerParameters">
+                <MavenRunnerParameters>
+                    <option name="profiles">
+                        <set/>
+                    </option>
+                    <option name="goals">
+                        <list>
+                            <option value="clean"/>
+                            <option value="install"/>
+                            <option value="-Daem.port=4503"/>
+                        </list>
+                    </option>
+                    <option name="pomFileName" value="pom.xml"/>
+                    <option name="profilesMap">
+                        <map>
+                            <entry key="autoInstallPackagePublish" value="true"/>
+                        </map>
+                    </option>
+                    <option name="resolveToWorkspace" value="false"/>
+                    <option name="workingDirPath" value="$PROJECT_DIR$/ui.acl"/>
+                </MavenRunnerParameters>
+            </option>
+        </MavenSettings>
+        <extension name="net.ashald.envfile">
+            <option name="IS_ENABLED" value="false"/>
+            <option name="IS_SUBST" value="false"/>
+            <option name="IS_PATH_MACRO_SUPPORTED" value="false"/>
+            <option name="IS_IGNORE_MISSING_FILES" value="false"/>
+            <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false"/>
+            <ENTRIES>
+                <ENTRY IS_ENABLED="true" PARSER="runconfig"/>
+            </ENTRIES>
+        </extension>
+        <method v="2"/>
+    </configuration>
+</component>
