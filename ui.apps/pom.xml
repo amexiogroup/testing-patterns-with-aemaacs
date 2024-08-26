@@ -98,12 +98,6 @@
 
         <dependency>
             <groupId>com.amexiogroup</groupId>
-            <artifactId>testing-patterns-with-aemaacs.ui.frontend</artifactId>
-            <version>${project.version}</version>
-            <type>zip</type>
-        </dependency>
-        <dependency>
-            <groupId>com.amexiogroup</groupId>
             <artifactId>testing-patterns-with-aemaacs.ui.apps.structure</artifactId>
             <version>${project.version}</version>
             <type>zip</type>

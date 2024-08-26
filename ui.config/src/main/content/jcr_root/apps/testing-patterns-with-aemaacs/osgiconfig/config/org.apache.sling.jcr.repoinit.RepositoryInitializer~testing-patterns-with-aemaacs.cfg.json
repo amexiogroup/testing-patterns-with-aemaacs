@@ -1,7 +1,0 @@
-{
-  "scripts": [
-    "create path (sling:OrderedFolder) /content/dam/testing-patterns-with-aemaacs",
-    "create path (nt:unstructured) /content/dam/testing-patterns-with-aemaacs/jcr:content",
-    "set properties on /content/dam/testing-patterns-with-aemaacs/jcr:content\n  set cq:conf{String} to /conf/testing-patterns-with-aemaacs\n  set jcr:title{String} to \"Testing Patterns With AEMaaCS\"\nend"
-  ]
-}
