@@ -1,7 +1,7 @@
 // Example of how a component should be initialized via JavaScript
 // This script logs the value of the component's text property model message to the console
 
-(function() {
+(function () {
     "use strict";
 
     // Best practice:
@@ -9,9 +9,9 @@
     // but use dedicated data attributes to identify all elements that the script needs to
     // interact with.
     var selectors = {
-        self:      '[data-cmp-is="helloworld"]',
-        property:  '[data-cmp-hook-helloworld="property"]',
-        message:   '[data-cmp-hook-helloworld="model"]'
+        self: '[data-cmp-is="helloworld"]',
+        property: '[data-cmp-hook-helloworld="property"]',
+        message: '[data-cmp-hook-helloworld="model"]'
     };
 
     function HelloWorld(config) {
@@ -52,16 +52,16 @@
         }
 
         var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-        var body             = document.querySelector("body");
-        var observer         = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
+        var body = document.querySelector("body");
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
                 // needed for IE
                 var nodesArray = [].slice.call(mutation.addedNodes);
                 if (nodesArray.length > 0) {
-                    nodesArray.forEach(function(addedNode) {
+                    nodesArray.forEach(function (addedNode) {
                         if (addedNode.querySelectorAll) {
                             var elementsArray = [].slice.call(addedNode.querySelectorAll(selectors.self));
-                            elementsArray.forEach(function(element) {
+                            elementsArray.forEach(function (element) {
                                 new HelloWorld({ element: element });
                             });
                         }

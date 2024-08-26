@@ -1,0 +1,52 @@
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 120
+tab_width = 4
+trim_trailing_whitespace = false
+ij_continuation_indent_size = 8
+
+[{*.xml,*.ant,*.fxml,*.jhm,*.jnlp,*.jrxml,*.pom,*.qrc,*.rng,*.tld,*.wadl,*.wsdl,*.xsd,*.xsl,*.xslt,*.xul,phpunit.xml.dist}]
+ij_xml_indent_size = 4
+ij_continuation_indent_size = 4
+ij_xml_align_attributes = true
+ij_xml_attribute_wrap = normal
+indent_size
+
+[{*.json,*.har,*.jsb2,*.jsb3,.babelrc,.eslintrc,.prettierrc,.stylelintrc,bowerrc,composer.lock,jest.config}]
+indent_size = 2
+
+[*.scss]
+indent_size = 4
+ij_scss_indent_size = 4
+
+[*.less]
+indent_size = 4
+ij_less_indent_size = 4
+
+[*.sass]
+indent_size = 4
+ij_sass_indent_size = 4
+
+[{*.bash,*.sh,*.zsh}]
+indent_size = 2
+
+[{*.cjs,*.js,*.ts}]
+ij_continuation_indent_size = 4
+ij_javascript_indent_size = 4
+ij_javascript_spaces_within_imports = true
+ij_javascript_use_double_quotes = false
+ij_javascript_spaces_within_object_literal_braces = true
+ij_javascript_spaces_within_object_type_braces = true
+ij_typescript_indent_size = 4
+ij_typescript_spaces_within_imports = true
+ij_typescript_use_double_quotes = false
+ij_typescript_spaces_within_object_literal_braces = true
+ij_typescript_spaces_within_object_type_braces = true
+
+[{*.yml,*.yaml}]
+indent_size = 2
+ij_yaml_indent_size = 2

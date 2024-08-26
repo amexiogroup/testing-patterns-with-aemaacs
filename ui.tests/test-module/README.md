@@ -1,12 +1,11 @@
 # Cypress Sample Test Module
 
-This module documents the recommended structure for a Cypress test module and adheres to the Cloud Manager UI test module conventions,
+This module documents the recommended structure for a Cypress test module and adheres to the Cloud Manager UI test
+module conventions,
 ensuring that tests will be executed and reports generated are stored in the proper location.
 
-Some examples of basic tasks like logging in-out of AEM instances, taking screenshots, logging browser requests are included.
-
-
-
+Some examples of basic tasks like logging in-out of AEM instances, taking screenshots, logging browser requests are
+included.
 
 - Install Cypress
   ```shell
@@ -36,7 +35,6 @@ Some examples of basic tasks like logging in-out of AEM instances, taking screen
   npx cypress run --headed --no-exit --browser chrome
   ```
 
-
 In order to be able to interpret the results of the tests correctly, a summary in JUnit format needs to be
 provided. To achieve this, both the `spec` and `mocha-junit-reporter` reporter are configured:
 
@@ -60,7 +58,6 @@ module.exports = {
 
 In order for the report to be found `reportPath` must be the value passed in the environment
 variable `REPORTS_PATH` as expected by EaaS. See [cypress.config.js](cypress.config.js)
-
 
 Cypress will automatically record videos for all test executions and create screenshots for test failures.
 

@@ -23,7 +23,7 @@ Cypress.Commands.add('AEMForceLogout', function () {
         }
     })
 
-    cy.get('form[name="login"]', {timeout: 3000}).should('exist')
+    cy.get('form[name="login"]', { timeout: 3000 }).should('exist')
 })
 
 Cypress.Commands.add('AEMLogin', function (username, password) {
@@ -37,7 +37,7 @@ Cypress.Commands.add('AEMLogin', function (username, password) {
     cy.get('#password').type(password, { log: false, parseSpecialCharSequences: false })
 
     cy.get('#submit-button').click()
-    cy.get('coral-shell-content', {timeout: 5000}).should('exist')
+    cy.get('coral-shell-content', { timeout: 5000 }).should('exist')
 })
 
 Cypress.Commands.add('AEMPathExists', function (baseUrl, path) {
@@ -111,7 +111,7 @@ Cypress.Commands.add('waitUntil', function (innerFunction, options = {}) {
             throw new Error(errorMsg)
         }
         // Wait and trigger a retry
-        cy.wait(interval, {log: false}).then(() => {
+        cy.wait(interval, { log: false }).then(() => {
             cy.log('Retrying...')
             retries--
             return callFunction()

@@ -38,9 +38,9 @@ class SimpleResourceListenerTest {
 
     @Test
     void handleEvent() {
-        
-        ResourceChange change = new ResourceChange(ChangeType.ADDED,"/content/test", false);
-        
+
+        ResourceChange change = new ResourceChange(ChangeType.ADDED, "/content/test", false);
+
         fixture.onChange(Arrays.asList(change));
 
         List<LoggingEvent> events = logger.getLoggingEvents();
@@ -52,7 +52,7 @@ class SimpleResourceListenerTest {
                 () -> assertEquals(3, event.getArguments().size()),
                 () -> assertEquals(ChangeType.ADDED, event.getArguments().get(0)),
                 () -> assertEquals("/content/test", event.getArguments().get(1)),
-                () -> assertEquals(Boolean.FALSE,event.getArguments().get(2))
+                () -> assertEquals(Boolean.FALSE, event.getArguments().get(2))
         );
     }
 }

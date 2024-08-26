@@ -48,28 +48,20 @@ import java.util.List;
 /**
  * Validates pages on publish and makes sure that the page renders completely and also
  * validates all linked resources (images, clientlibs etc).
- * 
  */
 public class PublishPageValidationIT {
 
 
-    // the page to test
-    private static final String HOMEPAGE = "/";
-
-    // list files which do return a zerobyte response body
-    private static final List<String> ZEROBYTEFILES = Arrays.asList();
-
-
-
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PublishPageValidationIT.class);
-
     @ClassRule
     public static final CQAuthorPublishClassRule cqBaseClassRule = new CQAuthorPublishClassRule(true);
-
+    // the page to test
+    private static final String HOMEPAGE = "/";
+    // list files which do return a zerobyte response body
+    private static final List<String> ZEROBYTEFILES = Arrays.asList();
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PublishPageValidationIT.class);
+    private static HtmlUnitClient adminPublish;
     @Rule
     public CQRule cqBaseRule = new CQRule(cqBaseClassRule.publishRule);
-
-    private static HtmlUnitClient adminPublish;
 
     @BeforeClass
     public static void beforeClass() throws ClientException {
@@ -84,22 +76,11 @@ public class PublishPageValidationIT {
         // (https://issues.apache.org/jira/browse/IO-504); thus a try-catch is used instead.
         try {
             adminPublish.close();
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 
-
-
-    @Test
-    @Ignore
-    public void validateHomepage() throws ClientException, IOException, URISyntaxException {
-        String path = HOMEPAGE;
-        verifyPage(adminPublish, path);
-        verifyLinkedResources(adminPublish,path);
-
-    }
-
-
-    private static void verifyPage (HtmlUnitClient client, String path) throws ClientProtocolException, IOException {
+    private static void verifyPage(HtmlUnitClient client, String path) throws ClientProtocolException, IOException {
         URI baseURI = client.getUrl();
         LOG.info("Using {} as baseURL", baseURI.toString());
         HttpGet get = new HttpGet(baseURI.toString() + path);
@@ -112,14 +93,14 @@ public class PublishPageValidationIT {
 
         List<URI> references = client.getResourceRefs(path);
         assertTrue(path + " does not contain any references!", references.size() > 0);
-        for (URI ref : references ) {
+        for (URI ref : references) {
             if (isSameOrigin(client.getUrl(), ref)) {
                 LOG.info("verifying linked resource {}", ref.toString());
                 SlingHttpResponse response = client.doGet(ref.getPath());
                 int statusCode = response.getStatusLine().getStatusCode();
                 int responseSize = response.getContent().length();
                 assertEquals("Unexpected status returned from [" + ref + "]", 200, statusCode);
-                if (! ZEROBYTEFILES.stream().anyMatch(s -> ref.getPath().startsWith(s))) {
+                if (!ZEROBYTEFILES.stream().anyMatch(s -> ref.getPath().startsWith(s))) {
                     if (responseSize == 0) {
                         LOG.warn("Empty response body from [" + ref.getPath() + "], please validate if this is correct");
                     }
@@ -131,7 +112,8 @@ public class PublishPageValidationIT {
         }
     }
 
-    /** Checks if two URIs have the same origin.
+    /**
+     * Checks if two URIs have the same origin.
      *
      * @param uri1 first URI
      * @param uri2 second URI
@@ -141,6 +123,15 @@ public class PublishPageValidationIT {
         if (!uri1.getScheme().equals(uri2.getScheme())) {
             return false;
         } else return uri1.getAuthority().equals(uri2.getAuthority());
+    }
+
+    @Test
+    @Ignore
+    public void validateHomepage() throws ClientException, IOException, URISyntaxException {
+        String path = HOMEPAGE;
+        verifyPage(adminPublish, path);
+        verifyLinkedResources(adminPublish, path);
+
     }
 
 

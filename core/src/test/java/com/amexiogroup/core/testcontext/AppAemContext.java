@@ -29,6 +29,16 @@ import io.wcm.testing.mock.aem.junit5.AemContextCallback;
  */
 public final class AppAemContext {
 
+    /**
+     * Custom set up rules required in all unit tests.
+     */
+    private static final AemContextCallback SETUP_CALLBACK = new AemContextCallback() {
+        @Override
+        public void execute(AemContext context) {
+            // custom project initialization code for every unit test
+        }
+    };
+
     private AppAemContext() {
         // static methods only
     }
@@ -56,15 +66,5 @@ public final class AppAemContext {
                 .plugin(CORE_COMPONENTS)
                 .afterSetUp(SETUP_CALLBACK);
     }
-
-    /**
-     * Custom set up rules required in all unit tests.
-     */
-    private static final AemContextCallback SETUP_CALLBACK = new AemContextCallback() {
-        @Override
-        public void execute(AemContext context) {
-            // custom project initialization code for every unit test
-        }
-    };
 
 }

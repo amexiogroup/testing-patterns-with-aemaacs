@@ -2,26 +2,26 @@
 
 html,
 body {
-    margin: 0;
-    font-size:   $font-size;
-    font-family: $font-family;
-    line-height: $font-height;
-    color:       $color-foreground;
-    background:  $color-background;
+  background: $color-background;
+  color: $color-foreground;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $font-height;
+  margin: 0;
 
-    @media (prefers-color-scheme: dark) {
-        color:       $color-foreground-dark;
-        background:  $color-background-dark;
-    }
+  @media (prefers-color-scheme: dark) {
+    background: $color-background-dark;
+    color: $color-foreground-dark;
+  }
 }
 
 
 a {
-    color: $color-link;
+  color: $color-link;
 
-    @media (prefers-color-scheme: dark) {
-        color: $color-link-dark;
-    }
+  @media (prefers-color-scheme: dark) {
+    color: $color-link-dark;
+  }
 }
 
 button,
@@ -29,5 +29,5 @@ input,
 optgroup,
 select,
 textarea {
-    font: inherit;
+  font: inherit;
 }

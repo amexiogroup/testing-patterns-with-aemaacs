@@ -42,17 +42,17 @@ describe('AEM Assets', () => {
         cy.wait(3000)
 
 
-        cy.intercept({url: '/content/dam.completeUpload.json', method: 'POST'}).as('completeupload')
+        cy.intercept({ url: '/content/dam.completeUpload.json', method: 'POST' }).as('completeupload')
 
         // Add the file handle to the upload form
-        cy.get('dam-chunkfileupload.dam-ChunkFileUpload > input').first().selectFile(localPath, {force: true})
+        cy.get('dam-chunkfileupload.dam-ChunkFileUpload > input').first().selectFile(localPath, { force: true })
 
         // rename image
         cy.get('input#dam-asset-upload-rename-input').clear()
-        cy.type(remoteImageName, {force: true});
+        cy.type(remoteImageName, { force: true });
 
         // Press the upload button.
-        cy.get('coral-dialog.is-open coral-dialog-footer [variant="primary"]').click({force: true});
+        cy.get('coral-dialog.is-open coral-dialog-footer [variant="primary"]').click({ force: true });
 
         // Wait for the /content/dam.completeUpload.json POST to complete before polling for the asset
         cy.wait(['@completeupload'], { responseTimeout: 10000 });

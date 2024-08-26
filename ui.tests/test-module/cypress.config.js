@@ -24,29 +24,29 @@ const publishName = process.env.AEM_PUBLISH_USERNAME || 'admin'
 const publishPass = process.env.AEM_PUBLISH_PASSWORD || 'admin'
 
 let config = {
-  env: {
-    AEM_AUTHOR_URL: authorURL,
-    AEM_AUTHOR_USERNAME: authorName,
-    AEM_AUTHOR_PASSWORD: authorPass,
-    AEM_PUBLISH_URL: publishURL,
-    AEM_PUBLISH_USERNAME: publishName,
-    AEM_PUBLISH_PASSWORD: publishPass,
-    REPORTS_PATH: reportsPath,
-  },
-  e2e: {
-    setupNodeEvents(on, config) {
-      require('cypress-terminal-report/src/installLogsPrinter')(on, {
-        printLogsToConsole: "always",
-      });
+    env: {
+        AEM_AUTHOR_URL: authorURL,
+        AEM_AUTHOR_USERNAME: authorName,
+        AEM_AUTHOR_PASSWORD: authorPass,
+        AEM_PUBLISH_URL: publishURL,
+        AEM_PUBLISH_USERNAME: publishName,
+        AEM_PUBLISH_PASSWORD: publishPass,
+        REPORTS_PATH: reportsPath,
     },
-    baseUrl: authorURL,
-    reporter: 'cypress-multi-reporters',
-    reporterOptions: {
-      configFile: 'reporter.config.js',
+    e2e: {
+        setupNodeEvents(on, config) {
+            require('cypress-terminal-report/src/installLogsPrinter')(on, {
+                printLogsToConsole: "always",
+            });
+        },
+        baseUrl: authorURL,
+        reporter: 'cypress-multi-reporters',
+        reporterOptions: {
+            configFile: 'reporter.config.js',
+        },
     },
-  },
-  videosFolder: reportsPath + "/videos",
-  screenshotsFolder: reportsPath + "/screenshots",
+    videosFolder: reportsPath + "/videos",
+    screenshotsFolder: reportsPath + "/screenshots",
 }
 
 module.exports = defineConfig(config);

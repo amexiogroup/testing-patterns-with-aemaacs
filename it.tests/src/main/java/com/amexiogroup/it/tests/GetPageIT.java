@@ -43,13 +43,10 @@ public class GetPageIT {
     // CQRule decorates your test and adds additional functionality on top of
     // it, like session stickyness, test filtering and identification of the
     // test on the remote service.
-
+    static CQClient adminAuthor;
+    static CQClient adminPublish;
     @Rule
     public CQRule cqBaseRule = new CQRule(cqBaseClassRule.authorRule, cqBaseClassRule.publishRule);
-
-    static CQClient adminAuthor;
-
-    static CQClient adminPublish;
 
     // Thanks to the CQAuthorClassRule, we can create two CQClient instances
     // bound to the admin user on both the author and publish service.

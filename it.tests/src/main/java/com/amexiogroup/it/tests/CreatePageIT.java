@@ -36,32 +36,28 @@ import static java.util.concurrent.TimeUnit.MINUTES;
  */
 public class CreatePageIT {
 
-    private static final long TIMEOUT = MINUTES.toMillis(3);
+    @ClassRule
+    public static final CQAuthorClassRule cqBaseClassRule = new CQAuthorClassRule();
 
     // The CQAuthorClassRule represents an author service. The rule will read
     // the hostname and port of the author service from the system properties
     // passed to the tests.
-
-    @ClassRule
-    public static final CQAuthorClassRule cqBaseClassRule = new CQAuthorClassRule();
+    private static final long TIMEOUT = MINUTES.toMillis(3);
 
     // CQRule decorates your test and adds additional functionality on top of
     // it, like session stickyness, test filtering and identification of the
     // test on the remote service.
-
-    @Rule
-    public CQRule cqBaseRule = new CQRule(cqBaseClassRule.authorRule);
+    static CQClient adminAuthor;
 
     // Page will create a test page with a random name and it will make sure
     // that the page is removed at the end of every test execution. By using a
     // random name, your test will not conflict with any other test running on
     // the same instance. By removing the page at the end of the test execution,
     // you are not going to leave any clutter on the instance under test.
-
+    @Rule
+    public CQRule cqBaseRule = new CQRule(cqBaseClassRule.authorRule);
     @Rule
     public Page root = new Page(cqBaseClassRule.authorRule);
-
-    static CQClient adminAuthor;
 
     // Thanks to the CQAuthorClassRule, we can create a CQClient bound to the
     // admin user on the author instance.

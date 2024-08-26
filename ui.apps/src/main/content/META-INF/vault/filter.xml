@@ -3,5 +3,5 @@
     <filter root="/apps/testing-patterns-with-aemaacs/clientlibs"/>
     <filter root="/apps/testing-patterns-with-aemaacs/components"/>
     <filter root="/apps/testing-patterns-with-aemaacs/i18n"/>
-    <filter root="/apps/sling" />
+    <filter root="/apps/sling"/>
 </workspaceFilter>
