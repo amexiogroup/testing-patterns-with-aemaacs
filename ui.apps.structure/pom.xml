@@ -31,8 +31,10 @@
                 <groupId>org.apache.jackrabbit</groupId>
                 <artifactId>filevault-package-maven-plugin</artifactId>
                 <configuration>
+                    <allowIndexDefinitions>true</allowIndexDefinitions>
                     <properties>
                         <cloudManagerTarget>none</cloudManagerTarget>
+                        <noIntermediateSaves>true</noIntermediateSaves>
                     </properties>
                     <filters>
                         <!-- /apps root -->
@@ -42,6 +44,12 @@
                         <filter>
                             <root>/apps/testing-patterns-with-aemaacs</root>
                         </filter>
+                        <filter>
+                            <root>
+                                /oak:index
+                            </root>
+                        </filter>
+
                         <!-- Common overlay roots -->
                         <filter>
                             <root>/apps/sling</root>

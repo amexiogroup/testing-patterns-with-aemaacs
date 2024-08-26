@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
     <filter root="/conf/testing-patterns-with-aemaacs" mode="merge"/>
-    <filter root="/content/testing-patterns-with-aemaacs" mode="merge"/>
-    <filter root="/content/dam/testing-patterns-with-aemaacs" mode="merge">
-        <exclude pattern="/content/dam/testing-patterns-with-aemaacs(/.*)?"/>
-        <include pattern="/content/dam/testing-patterns-with-aemaacs/jcr:content(/.*)?"/>
-    </filter>
-    <filter root="/content/dam/testing-patterns-with-aemaacs/asset.jpg" mode="merge"/>
-    <filter root="/content/experience-fragments/testing-patterns-with-aemaacs" mode="merge"/>
 </workspaceFilter>

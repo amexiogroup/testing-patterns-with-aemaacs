@@ -16,8 +16,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <it.tests.include>**/*IT.java</it.tests.include>
     </properties>
 
     <dependencies>
@@ -29,17 +31,48 @@
         <dependency>
             <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
-            <version>3.10.0</version>
+            <version>3.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+            <version>1.6</version>
         </dependency>
         <dependency>
             <groupId>com.adobe.cq</groupId>
             <artifactId>aem-cloud-testing-clients</artifactId>
             <version>1.2.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.testing.clients</artifactId>
+            <version>3.0.24</version>
+            <exclusions>
+                <!-- A newer version of servlet-api is included in the dependencies below -->
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
     </dependencies>
 
@@ -52,17 +85,18 @@
                 <it.author.user>admin</it.author.user>
                 <it.author.password>admin</it.author.password>
 
-                <!-- cloud publish service (LB) -->
-                <it.publish.url>http://localhost:4503</it.publish.url>
-                <it.publish.user>admin</it.publish.user>
-                <it.publish.password>admin</it.publish.password>
+                <!-- cloud publish service (uses dispatcher) -->
+                <it.publish.url>http://localhost:80</it.publish.url>
+                <it.publish.user/>
+                <it.publish.password/>
+
+                <it.tests.include>%regex[.*(Test|IT).class]</it.tests.include>
             </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>3.2.5</version>
                         <configuration>
                             <skip>true</skip>
                         </configuration>
@@ -70,7 +104,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>3.2.5</version>
                         <configuration>
                             <testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
                             <testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
@@ -107,7 +140,7 @@
                                 </goals>
                                 <configuration>
                                     <includes>
-                                        <include>**/*IT.java</include>
+                                        <include>${it.tests.include}</include>
                                     </includes>
                                 </configuration>
                             </execution>
@@ -125,38 +158,6 @@
     </profiles>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.3.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.12.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.1</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

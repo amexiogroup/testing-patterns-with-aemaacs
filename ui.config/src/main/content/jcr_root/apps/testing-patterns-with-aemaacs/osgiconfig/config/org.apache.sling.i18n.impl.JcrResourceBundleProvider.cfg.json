@@ -1,0 +1,7 @@
+{
+  "included.paths": [
+    "/apps",
+    "/libs",
+    "/content/dictionaries"
+  ]
+}

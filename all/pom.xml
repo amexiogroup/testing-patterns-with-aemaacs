@@ -38,6 +38,8 @@
                     <packageType>container</packageType>
                     <!-- skip sub package validation for now as some vendor packages like CIF apps will not pass -->
                     <skipSubPackageValidation>true</skipSubPackageValidation>
+                    <!-- set to false to make one package for local vs cloud service -->
+                    <failOnMissingEmbed>false</failOnMissingEmbed>
                     <embeddeds>
                         <embedded>
                             <groupId>com.amexiogroup</groupId>
@@ -63,34 +65,20 @@
                             <target>/apps/testing-patterns-with-aemaacs-packages/application/install</target>
                         </embedded>
                         <embedded>
-                            <groupId>com.adobe.cq</groupId>
-                            <artifactId>core.wcm.components.examples.ui.config</artifactId>
+                            <groupId>com.amexiogroup</groupId>
+                            <artifactId>testing-patterns-with-aemaacs.it.content</artifactId>
                             <type>zip</type>
-                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>com.adobe.cq</groupId>
-                            <artifactId>core.wcm.components.examples.ui.apps</artifactId>
-                            <type>zip</type>
-                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>com.adobe.cq</groupId>
-                            <artifactId>core.wcm.components.examples.ui.content</artifactId>
-                            <type>zip</type>
-                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/content/install</target>
+                            <target>/apps/testing-patterns-with-aemaacs-packages/application/install</target>
+                            <!-- Make sure to not include it.content even if another content package depends on it -->
+                            <excludeTransitive>true</excludeTransitive>
                         </embedded>
                     </embeddeds>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.day.jcr.vault</groupId>
-                <artifactId>content-package-maven-plugin</artifactId>
+                <groupId>io.wcm.maven.plugins</groupId>
+                <artifactId>wcmio-content-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration>
-                    <verbose>true</verbose>
-                    <failOnError>true</failOnError>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -107,6 +95,9 @@
             <plugin>
                 <groupId>com.adobe.aem</groupId>
                 <artifactId>aemanalyser-maven-plugin</artifactId>
+                <configuration>
+                    <sdkVersion>${aem.sdk.api}</sdkVersion>
+                </configuration>
                 <executions>
                     <execution>
                         <id>aem-analyser</id>
@@ -131,8 +122,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>content-package-maven-plugin</artifactId>
+                        <groupId>io.wcm.maven.plugins</groupId>
+                        <artifactId>wcmio-content-package-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>install-package</id>
@@ -140,8 +131,7 @@
                                     <goal>install</goal>
                                 </goals>
                                 <configuration>
-                                    <targetURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</targetURL>
-                                    <failOnError>true</failOnError>
+                                    <serviceURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</serviceURL>
                                 </configuration>
                             </execution>
                         </executions>
@@ -157,8 +147,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.day.jcr.vault</groupId>
-                        <artifactId>content-package-maven-plugin</artifactId>
+                        <groupId>io.wcm.maven.plugins</groupId>
+                        <artifactId>wcmio-content-package-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>install-package-publish</id>
@@ -166,15 +156,30 @@
                                     <goal>install</goal>
                                 </goals>
                                 <configuration>
-                                    <targetURL>http://${aem.publish.host}:${aem.publish.port}/crx/packmgr/service.jsp
-                                    </targetURL>
-                                    <failOnError>true</failOnError>
+                                    <serviceURL>http://${aem.publish.host}:${aem.publish.port}/crx/packmgr/service.jsp
+                                    </serviceURL>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>local</id>
+            <activation>
+                <property>
+                    <name>!env.CM_BUILD</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.amexiogroup</groupId>
+                    <artifactId>testing-patterns-with-aemaacs.it.content</artifactId>
+                    <version>${project.version}</version>
+                    <type>zip</type>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
@@ -198,22 +203,6 @@
             <groupId>com.amexiogroup</groupId>
             <artifactId>testing-patterns-with-aemaacs.ui.config</artifactId>
             <version>${project.version}</version>
-            <type>zip</type>
-        </dependency>
-
-        <dependency>
-            <groupId>com.adobe.cq</groupId>
-            <artifactId>core.wcm.components.examples.ui.config</artifactId>
-            <type>zip</type>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.cq</groupId>
-            <artifactId>core.wcm.components.examples.ui.apps</artifactId>
-            <type>zip</type>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.cq</groupId>
-            <artifactId>core.wcm.components.examples.ui.content</artifactId>
             <type>zip</type>
         </dependency>
     </dependencies>

@@ -1,0 +1,5 @@
+{
+  "authIdsForHookExecution": [
+    "sling-distribution-importer"
+  ]
+}

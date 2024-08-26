@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicated="{Date}2030-01-01T00:00:00.000Z"
+        jcr:primaryType="cq:PageContent"
+        prefixPath="/content/testing-patterns-with-aemaacs.proxy.theme/themes/testing-patterns-with-aemaacs/_default">
+    </jcr:content>
+</jcr:root>

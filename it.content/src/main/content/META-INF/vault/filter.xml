@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <!-- Deceuninck Content -->
+    <filter root="/conf/testing-patterns-with-aemaacs/sling:configs" mode="update"/>
+
+    <filter root="/content/dam/testing-patterns-with-aemaacs"/>
+    <filter root="/content/dam/content-fragments/testing-patterns-with-aemaacs"/>
+    <filter root="/content/experience-fragments/testing-patterns-with-aemaacs"/>
+    <filter root="/content/testing-patterns-with-aemaacs"/>
+
+    <!-- Tags -->
+    <filter root="/content/cq:tags"/>
+
+</workspaceFilter>

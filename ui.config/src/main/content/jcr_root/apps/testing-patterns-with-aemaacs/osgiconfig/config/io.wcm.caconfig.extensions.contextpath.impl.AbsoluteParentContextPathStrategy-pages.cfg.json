@@ -1,0 +1,14 @@
+{
+  "levels": [
+    1
+  ],
+  "unlimited": true,
+  "contextPathRegex": "^/content(/.+)$",
+  "configPathPatterns": [
+    "/conf$1"
+  ],
+  "templatePathsBlacklist": [
+    "/conf/testing-patterns-with-aemaacs/settings/wcm/templates/config-editor"
+  ],
+  "service.ranking": 10
+}

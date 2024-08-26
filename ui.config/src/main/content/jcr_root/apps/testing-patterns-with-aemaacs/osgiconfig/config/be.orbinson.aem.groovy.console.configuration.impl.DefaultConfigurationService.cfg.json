@@ -1,0 +1,10 @@
+{
+  "allowedGroups": [
+    "administrators"
+  ],
+  "allowedScheduledJobsGroups": [
+    "administrators"
+  ],
+  "distributedExecutionEnabled": true,
+  "vanityPathEnabled": true
+}

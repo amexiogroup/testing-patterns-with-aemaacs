@@ -1,0 +1,11 @@
+{
+  "levels": [
+    2
+  ],
+  "unlimited": true,
+  "contextPathRegex": "^/content/experience-fragments(/.+)$",
+  "configPathPatterns": [
+    "/conf$1"
+  ],
+  "service.ranking": 20
+}

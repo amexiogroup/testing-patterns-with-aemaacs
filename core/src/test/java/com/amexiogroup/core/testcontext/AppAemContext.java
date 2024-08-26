@@ -15,14 +15,33 @@
  */
 package com.amexiogroup.core.testcontext;
 
-import static com.adobe.cq.wcm.core.components.testing.mock.ContextPlugins.CORE_COMPONENTS;
-import static org.apache.sling.testing.mock.caconfig.ContextPlugins.CACONFIG;
-
-import org.apache.sling.testing.mock.sling.ResourceResolverType;
-
+import com.adobe.acs.commons.models.injectors.impl.HierarchicalPagePropertyInjector;
+import com.adobe.cq.wcm.core.components.internal.link.LinkManagerImpl;
+import com.adobe.cq.wcm.core.components.internal.models.v3.PageImpl;
+import com.adobe.cq.wcm.core.components.testing.MockHtmlLibraryManager;
+import com.adobe.cq.wcm.core.components.testing.MockProductInfoProvider;
+import com.adobe.granite.ui.clientlibs.ClientLibrary;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextBuilder;
 import io.wcm.testing.mock.aem.junit5.AemContextCallback;
+import io.wcm.testing.mock.wcmio.caconfig.MockCAConfig;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.models.annotations.via.ResourceSuperType;
+import org.apache.sling.models.impl.via.ResourceSuperTypeViaProvider;
+import org.apache.sling.models.spi.ViaProvider;
+import org.apache.sling.testing.mock.sling.ResourceResolverType;
+import org.jetbrains.annotations.NotNull;
+import org.mockito.Mockito;
+
+import static com.adobe.cq.wcm.core.components.testing.mock.ContextPlugins.CORE_COMPONENTS;
+import static io.wcm.testing.mock.wcmio.caconfig.ContextPlugins.WCMIO_CACONFIG;
+import static io.wcm.testing.mock.wcmio.sling.ContextPlugins.WCMIO_SLING;
+import static org.apache.sling.testing.mock.caconfig.ContextPlugins.CACONFIG;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Sets up {@link AemContext} for unit tests in this application.
@@ -46,8 +65,9 @@ public final class AppAemContext {
     /**
      * @return {@link AemContext}
      */
+    @NotNull
     public static AemContext newAemContext() {
-        return newAemContextBuilder().build();
+        return newAemContext(null);
     }
 
     /**
@@ -57,14 +77,46 @@ public final class AppAemContext {
         return newAemContextBuilder(ResourceResolverType.RESOURCERESOLVER_MOCK);
     }
 
+    @NotNull
+    public static AemContext newAemContext(final ResourceResolverType resourceResolverType) {
+        return newAemContextBuilder(resourceResolverType).build();
+    }
+
     /**
      * @return {@link AemContextBuilder}
      */
-    public static AemContextBuilder newAemContextBuilder(ResourceResolverType resourceResolverType) {
-        return new AemContextBuilder()
+    @NotNull
+    public static AemContextBuilder newAemContextBuilder(final ResourceResolverType resourceResolverType) {
+        return new AemContextBuilder(resourceResolverType)
                 .plugin(CACONFIG)
+                .plugin(WCMIO_CACONFIG)
+                .plugin(WCMIO_SLING)
                 .plugin(CORE_COMPONENTS)
-                .afterSetUp(SETUP_CALLBACK);
+                // Since we have lots of Sling Models, we're not registering the models from the class path as this slows down the unit tests immensely
+                .registerSlingModelsFromClassPath(false)
+                .beforeSetUp(BEFORE_SETUP_CALLBACK)
+                .afterSetUp(AFTER_SETUP_CALLBACK)
+                .afterSetUp(REGISTER_CACONFIG_CONFIGS);
     }
+
+    private static final AemContextCallback BEFORE_SETUP_CALLBACK = context -> {
+        context.registerInjectActivateService(new HierarchicalPagePropertyInjector());
+    };
+
+    private static final AemContextCallback AFTER_SETUP_CALLBACK = context -> {
+        context.addModelsForClasses(LinkManagerImpl.class);
+    };
+
+    public static void registerDelegate(AemContext context, Object delegate) {
+        ResourceSuperTypeViaProvider resourceSuperTypeViaProvider = Mockito.mock(ResourceSuperTypeViaProvider.class);
+        // Mock the ResourceSuperTypeProvider, so we can return our mocked delegate
+        when(resourceSuperTypeViaProvider.getType()).thenAnswer(answer -> ResourceSuperType.class);
+        when(resourceSuperTypeViaProvider.getAdaptable(any(SlingHttpServletRequest.class), eq(StringUtils.EMPTY))).thenAnswer(answer -> delegate);
+        context.registerService(ViaProvider.class, resourceSuperTypeViaProvider);
+    }
+
+    private static final AemContextCallback REGISTER_CACONFIG_CONFIGS = context -> {
+        MockCAConfig.contextPathStrategyAbsoluteParent(context, 1, 2);
+    };
 
 }
