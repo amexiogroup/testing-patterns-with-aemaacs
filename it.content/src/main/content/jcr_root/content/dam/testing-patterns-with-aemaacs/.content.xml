@@ -6,7 +6,6 @@
             cq:conf="/conf/testing-patterns-with-aemaacs"
             jcr:primaryType="nt:unstructured"
             jcr:title="Testing Patterns With AEMaaCS">
-        <folderThumbnail/>
     </jcr:content>
     <asset.jpg/>
 </jcr:root>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.amexiogroup</groupId>
+        <artifactId>testing-patterns-with-aemaacs</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>testing-patterns-with-aemaacs.ui.acl</artifactId>
+    <packaging>content-package</packaging>
+    <name>Testing Patterns With AEMaaCS - UI ACL</name>
+    <description>UI ACL package for Testing Patterns With AEMaaCS</description>
+
+    <build>
+        <sourceDirectory>src/main/content/jcr_root</sourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>filevault-package-maven-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <cloudManagerTarget>none</cloudManagerTarget>
+                        <noIntermediateSaves>true</noIntermediateSaves>
+                    </properties>
+                    <group>com.amexiogroup</group>
+                    <name>testing-patterns-with-aemaacs.ui.apps</name>
+                    <repositoryStructurePackages>
+                        <repositoryStructurePackage>
+                            <groupId>com.amexiogroup</groupId>
+                            <artifactId>testing-patterns-with-aemaacs.ui.apps.structure</artifactId>
+                        </repositoryStructurePackage>
+                    </repositoryStructurePackages>
+                    <dependencies>
+                        <dependency>
+                            <groupId>biz.netcentric.cq.tools.accesscontroltool</groupId>
+                            <artifactId>accesscontroltool-package</artifactId>
+                            <classifier>cloud</classifier>
+                        </dependency>
+                    </dependencies>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.wcm.maven.plugins</groupId>
+                <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.amexiogroup</groupId>
+            <artifactId>testing-patterns-with-aemaacs.ui.apps.structure</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>biz.netcentric.cq.tools.accesscontroltool</groupId>
+            <artifactId>accesscontroltool-package</artifactId>
+            <type>content-package</type>
+            <classifier>cloud</classifier>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>installHook</id>
+            <activation>
+                <property>
+                    <name>!env.CM_BUILD</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.jackrabbit</groupId>
+                        <artifactId>filevault-package-maven-plugin</artifactId>
+                        <configuration>
+                            <packageType>mixed</packageType>
+                            <properties>
+                                <installhook.actool.class>biz.netcentric.cq.tools.actool.installhook.AcToolInstallHook</installhook.actool.class>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.amexiogroup</groupId>
+        <artifactId>testing-patterns-with-aemaacs</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>testing-patterns-with-aemaacs.ui.migration</artifactId>
+    <packaging>content-package</packaging>
+    <name>Testing Patterns With AEMaaCS - UI migration</name>
+    <description>UI migration package for Testing Patterns With AEMaaCS</description>
+
+    <build>
+        <sourceDirectory>src/main/content/jcr_root</sourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>filevault-package-maven-plugin</artifactId>
+                <configuration>
+                    <group>com.amexiogroup</group>
+                    <name>testing-patterns-with-aemaacs.ui.apps</name>
+                    <properties>
+                        <cloudManagerTarget>none</cloudManagerTarget>
+                        <noIntermediateSaves>true</noIntermediateSaves>
+                    </properties>
+                    <packageType>application</packageType>
+                    <repositoryStructurePackages>
+                        <repositoryStructurePackage>
+                            <groupId>com.amexiogroup</groupId>
+                            <artifactId>testing-patterns-with-aemaacs.ui.apps.structure</artifactId>
+                        </repositoryStructurePackage>
+                    </repositoryStructurePackages>
+                    <validatorsSettings>
+                        <jackrabbit-filter>
+                            <options>
+                                <validRoots>/apps,/apps/aecu-scripts</validRoots>
+                            </options>
+                        </jackrabbit-filter>
+                    </validatorsSettings>
+                    <dependencies>
+                        <dependency>
+                            <groupId>de.valtech.aecu</groupId>
+                            <artifactId>aecu.complete.cloud</artifactId>
+                        </dependency>
+                    </dependencies>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.wcm.maven.plugins</groupId>
+                <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- ====================================================================== -->
+    <!-- D E P E N D E N C I E S                                                -->
+    <!-- ====================================================================== -->
+    <dependencies>
+        <dependency>
+            <groupId>com.amexiogroup</groupId>
+            <artifactId>testing-patterns-with-aemaacs.ui.apps.structure</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>de.valtech.aecu</groupId>
+            <artifactId>aecu.complete.cloud</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>aem-sdk-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>installHook</id>
+            <activation>
+                <property>
+                    <name>!env.CM_BUILD</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.jackrabbit</groupId>
+                        <artifactId>filevault-package-maven-plugin</artifactId>
+                        <configuration>
+                            <packageType>mixed</packageType>
+                            <properties>
+                                <installhook.aecu.class>de.valtech.aecu.core.installhook.AecuInstallHook
+                                </installhook.aecu.class>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

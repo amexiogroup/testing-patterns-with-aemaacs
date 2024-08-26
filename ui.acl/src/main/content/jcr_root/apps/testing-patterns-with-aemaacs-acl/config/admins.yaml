@@ -1,0 +1,92 @@
+- group_config:
+    - testing-patterns-with-aemaacs-administrators:
+        - name: Testing Patterns With AEMaaCS Administrators
+          isMemberOf: tag-administrators
+          externalId: testing-patterns-with-aemaacs-administrators;ims
+          path: /home/groups/testing-patterns-with-aemaacs
+
+- ace_config:
+    - testing-patterns-with-aemaacs-administrators:
+        # allow publication of CA Configs
+        - path: /conf/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: crx:replicate
+
+        - path: /conf/testing-patterns-with-aemaacs/sling:configs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+
+        - path: /conf/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+          restrictions:
+            rep:globs: /*/sling:configs,/*/sling:configs/*
+          
+          # Translation labels
+        - path: /content/dictionaries/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+
+          # Replication rights needed on / to be able to deactivate & remove translation labels
+        - path: /
+          permission: allow
+          privileges: crx:replicate
+          restrictions:
+            rep:current: ''
+    
+        # Allow replication for pages
+        - path: /conf/*/settings/wcm/templates
+          permission: allow
+          privileges: crx:replicate
+
+        - path: /conf/*/settings/wcm/policies
+          permission: allow
+          privileges: crx:replicate
+
+        - path: /conf
+          permission: allow
+          privileges: crx:replicate
+          restrictions:
+            rep:subtrees: /cloudconfigs
+
+        - path: /content/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+
+        - path: /content/experience-fragments/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+
+        - path: /content/dam/content-fragments/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+
+        # Content Fragment Models editor
+        - path: /conf/testing-patterns-with-aemaacs/settings/dam/cfm/models
+          permission: allow
+          privileges: crx:replicate
+
+        - path: /content/dam/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:all,crx:replicate
+
+        - path: /conf/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:read
+
+        - path: /conf/testing-patterns-with-aemaacs/sling:configs
+          permission: allow
+          privileges: jcr:read,jcr:nodeTypeManagement,jcr:modifyProperties,jcr:addChildNodes
+
+        - path: /conf/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: jcr:read,jcr:nodeTypeManagement,jcr:modifyProperties,jcr:addChildNodes
+          restrictions:
+            rep:globs: /*/sling:configs,/*/sling:configs/*
+
+        # ACS Commons Redirects
+        - path: /conf/testing-patterns-with-aemaacs
+          permission: allow
+          privileges: rep:write,crx:replicate
+          restrictions:
+            rep:globs: /settings/redirects,/*/settings/redirects,/*/settings/redirects/*

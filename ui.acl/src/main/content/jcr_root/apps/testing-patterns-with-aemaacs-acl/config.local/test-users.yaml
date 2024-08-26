@@ -1,0 +1,7 @@
+- user_config:
+
+    - testing-patterns-with-aemaacs-administrator:
+        - isMemberOf: testing-patterns-with-aemaacs-administrators
+          name: " Testing Patterns With AEMaaCS Administrator Test User"
+          path: /home/users/d
+          password: testing-patterns-with-aemaacs-administrator

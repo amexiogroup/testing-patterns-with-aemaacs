@@ -66,6 +66,18 @@
                         </embedded>
                         <embedded>
                             <groupId>com.amexiogroup</groupId>
+                            <artifactId>testing-patterns-with-aemaacs.ui.acl</artifactId>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.amexiogroup</groupId>
+                            <artifactId>testing-patterns-with-aemaacs.ui.migration</artifactId>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.amexiogroup</groupId>
                             <artifactId>testing-patterns-with-aemaacs.it.content</artifactId>
                             <type>zip</type>
                             <target>/apps/testing-patterns-with-aemaacs-packages/application/install</target>
@@ -202,6 +214,18 @@
         <dependency>
             <groupId>com.amexiogroup</groupId>
             <artifactId>testing-patterns-with-aemaacs.ui.config</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.amexiogroup</groupId>
+            <artifactId>testing-patterns-with-aemaacs.ui.acl</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.amexiogroup</groupId>
+            <artifactId>testing-patterns-with-aemaacs.ui.migration</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
