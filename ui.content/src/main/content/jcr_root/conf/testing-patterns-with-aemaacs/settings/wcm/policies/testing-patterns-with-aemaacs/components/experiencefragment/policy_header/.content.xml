@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          cq:styleDefaultElement="header"
+          jcr:description="Sets a &lt;header&gt; element on the page header experience fragment."
+          jcr:primaryType="nt:unstructured" jcr:title="Page Header"
+          sling:resourceType="wcm/core/components/policy/policy">
+    <jcr:content jcr:primaryType="nt:unstructured"/>
+</jcr:root>

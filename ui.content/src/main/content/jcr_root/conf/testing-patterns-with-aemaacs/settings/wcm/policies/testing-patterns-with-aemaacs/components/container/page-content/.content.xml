@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          components="[group:Dynamic Media,group:Testing Patterns With AEMaaCS - Content,/apps/testing-patterns-with-aemaacs}/components/form/container]"
+          jcr:description="Allows the page components and defines the component mapping (this configures what components should be automatically created when authors drop assets from the content finder to the page editor)."
+          jcr:primaryType="nt:unstructured" jcr:title="Page Content"
+          sling:resourceType="wcm/core/components/policy/policy">
+    <jcr:content jcr:primaryType="nt:unstructured"/>
+    <cq:authoring jcr:primaryType="nt:unstructured">
+        <assetToComponentMapping jcr:primaryType="nt:unstructured">
+            <mapping_1575030255082 assetGroup="media" assetMimetype="image/*" droptarget="image"
+                                   resourceType="testing-patterns-with-aemaacs/components/image"
+                                   jcr:primaryType="nt:unstructured"/>
+            <mapping_1575030260142 assetGroup="content" assetMimetype="text/html" droptarget="experiencefragment"
+                                   resourceType="testing-patterns-with-aemaacs/components/experiencefragment"
+                                   jcr:primaryType="nt:unstructured"/>
+            <mapping_1575030269139 assetGroup="media"
+                                   assetMimetype="[text/html,application/vnd.adobe.contentfragment]"
+                                   droptarget="contentfragment"
+                                   resourceType="testing-patterns-with-aemaacs/components/contentfragment"
+                                   jcr:primaryType="nt:unstructured"/>
+        </assetToComponentMapping>
+    </cq:authoring>
+</jcr:root>

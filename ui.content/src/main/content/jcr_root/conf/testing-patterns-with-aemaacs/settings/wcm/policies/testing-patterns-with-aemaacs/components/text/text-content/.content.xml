@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured" jcr:title="Content Text"
+          sling:resourceType="wcm/core/components/policy/policy">
+    <jcr:content jcr:primaryType="nt:unstructured"/>
+    <rtePlugins jcr:primaryType="nt:unstructured">
+        <paraformat features="*" jcr:primaryType="nt:unstructured">
+            <formats override="true" jcr:primaryType="nt:unstructured">
+                <item0 description="Paragraph" tag="p" jcr:primaryType="nt:unstructured"/>
+                <item1 description="Quote" tag="blockquote" jcr:primaryType="nt:unstructured"/>
+                <item2 description="Preformatted" tag="pre" jcr:primaryType="nt:unstructured"/>
+            </formats>
+        </paraformat>
+        <misctools features="-" jcr:primaryType="nt:unstructured">
+            <specialCharsConfig jcr:primaryType="nt:unstructured">
+                <chars override="true" jcr:primaryType="nt:unstructured">
+                    <item0 entity="&amp;copy;" name="copyright" jcr:primaryType="nt:unstructured"/>
+                    <item1 entity="&amp;euro;" name="euro" jcr:primaryType="nt:unstructured"/>
+                    <item2 entity="&amp;reg;" name="registered" jcr:primaryType="nt:unstructured"/>
+                    <item3 entity="&amp;trade;" name="trademark" jcr:primaryType="nt:unstructured"/>
+                </chars>
+            </specialCharsConfig>
+        </misctools>
+        <edit features="-" jcr:primaryType="nt:unstructured"/>
+        <findreplace features="-" jcr:primaryType="nt:unstructured"/>
+        <undo features="-" jcr:primaryType="nt:unstructured"/>
+        <spellcheck features="-" jcr:primaryType="nt:unstructured"/>
+        <image features="-" jcr:primaryType="nt:unstructured"/>
+        <table features="-" jcr:primaryType="nt:unstructured"/>
+        <lists features="*" jcr:primaryType="nt:unstructured"/>
+        <justify features="-" jcr:primaryType="nt:unstructured"/>
+        <format features="bold,italic" jcr:primaryType="nt:unstructured"/>
+        <links features="modifylink,unlink" jcr:primaryType="nt:unstructured"/>
+        <subsuperscript features="-" jcr:primaryType="nt:unstructured"/>
+    </rtePlugins>
+</jcr:root>
