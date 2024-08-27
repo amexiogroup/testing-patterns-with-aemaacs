@@ -1,12 +1,11 @@
 - group_config:
-    - testing-patterns-with-aemaacs-administrators:
+    - testing-patterns-with-aemaacs-web-admins:
         - name: Testing Patterns With AEMaaCS Administrators
-          isMemberOf: tag-administrators
-          externalId: testing-patterns-with-aemaacs-administrators;ims
+          externalId: testing-patterns-with-aemaacs-web-admins;ims
           path: /home/groups/testing-patterns-with-aemaacs
 
 - ace_config:
-    - testing-patterns-with-aemaacs-administrators:
+    - testing-patterns-with-aemaacs-web-admins:
         # allow publication of CA Configs
         - path: /conf/testing-patterns-with-aemaacs
           permission: allow

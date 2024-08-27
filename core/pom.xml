@@ -154,7 +154,7 @@ Import-Package: javax.annotation;version=0.0.0,*
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
         </dependency>
-        
+
         <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -289,7 +289,7 @@ Import-Package: javax.annotation;version=0.0.0,*
             <groupId>de.valtech.aecu</groupId>
             <artifactId>aecu.api</artifactId>
         </dependency>
-        
+
         <!-- Required to be able to support injection with @Self and @Via -->
         <dependency>
             <groupId>org.apache.sling</groupId>
@@ -342,17 +342,16 @@ Import-Package: javax.annotation;version=0.0.0,*
                             <failsOnError>true</failsOnError>
                             <failOnViolation>true</failOnViolation>
                             <violationSeverity>warning</violationSeverity>
-                            <configLocation>google_checks.xml</configLocation>
+                            <configLocation>src/main/resources/checkstyle.xml</configLocation>
                         </configuration>
-                        <!-- Disable this for now, it seems we did not configure this correctly and will have to fix everything reactively -->
-                        <!--                        <executions>-->
-                        <!--                            <execution>-->
-                        <!--                                <id>checkstyle</id>-->
-                        <!--                                <goals>-->
-                        <!--                                    <goal>check</goal>-->
-                        <!--                                </goals>-->
-                        <!--                            </execution>-->
-                        <!--                        </executions>-->
+                        <executions>
+                            <execution>
+                                <id>checkstyle</id>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>com.github.spotbugs</groupId>
@@ -377,6 +376,9 @@ Import-Package: javax.annotation;version=0.0.0,*
                             <printFailingErrors>true</printFailingErrors>
                             <analysisCache>true</analysisCache>
                             <targetJdk>11</targetJdk>
+                            <rulesets>
+                                <ruleset>src/main/resources/pmd.xml</ruleset>
+                            </rulesets>
                         </configuration>
                         <executions>
                             <execution>
