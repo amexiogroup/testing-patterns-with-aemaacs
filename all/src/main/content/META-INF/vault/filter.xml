@@ -16,5 +16,4 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <workspaceFilter version="1.0">
     <filter root="/apps/testing-patterns-with-aemaacs-packages"/>
-    <filter root="/apps/testing-patterns-with-aemaacs-vendor-packages"/>
 </workspaceFilter>

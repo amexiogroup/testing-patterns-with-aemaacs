@@ -1,0 +1,420 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ====================================================================== -->
+    <!-- P A R E N T  P R O J E C T  D E S C R I P T I O N                      -->
+    <!-- ====================================================================== -->
+    <parent>
+        <groupId>com.amexiogroup</groupId>
+        <artifactId>testing-patterns-with-aemaacs</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <!-- ====================================================================== -->
+    <!-- P R O J E C T  D E S C R I P T I O N                                   -->
+    <!-- ====================================================================== -->
+    <artifactId>testing-patterns-with-aemaacs.frameworks</artifactId>
+    <packaging>content-package</packaging>
+    <name>Testing Patterns With AEMaaCS - Frameworks</name>
+    <description>Frameworks content package for Testing Patterns With AEMaaCS</description>
+
+    <!-- ====================================================================== -->
+    <!-- B U I L D   D E F I N I T I O N                                        -->
+    <!-- ====================================================================== -->
+    <build>
+        <plugins>
+            <!-- ====================================================================== -->
+            <!-- V A U L T   P A C K A G E   P L U G I N S                              -->
+            <!-- ====================================================================== -->
+            <plugin>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>filevault-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <group>com.amexiogroup</group>
+                    <packageType>container</packageType>
+                    <properties>
+                        <cloudManagerTarget>none</cloudManagerTarget>
+                    </properties>
+                    <!-- skip sub package validation for now as some vendor packages like CIF apps will not pass -->
+                    <skipSubPackageValidation>true</skipSubPackageValidation>
+                    <!-- set to false to make one package for local vs cloud service -->
+                    <failOnMissingEmbed>false</failOnMissingEmbed>
+                    <embeddeds>
+                        <!-- Sling -->
+                        <embedded>
+                            <groupId>org.apache.sling</groupId>
+                            <artifactId>org.apache.sling.models.caconfig</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>org.apache.sling</groupId>
+                            <artifactId>org.apache.sling.contentparser.api</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>org.apache.sling</groupId>
+                            <artifactId>org.apache.sling.contentparser.json</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>org.apache.sling</groupId>
+                            <artifactId>org.apache.sling.dynamic-include</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>be.orbinson.aem</groupId>
+                            <artifactId>aem-dictionary-translator.all</artifactId>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- WCM.io -->
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.sling.commons</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.sling.models</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.caconfig.extensions</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.caconfig.editor</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.caconfig.editor</artifactId>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.handler.link</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.wcm.commons</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.handler.commons</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.handler.url</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.handler.media</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>io.wcm</groupId>
+                            <artifactId>io.wcm.wcm.ui.granite</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- AEM Easy Content Upgrade (contains groovyconsole) -->
+                        <embedded>
+                            <groupId>de.valtech.aecu</groupId>
+                            <artifactId>aecu.complete.cloud</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- Composum -->
+                        <embedded>
+                            <groupId>com.composum.nodes</groupId>
+                            <artifactId>composum-nodes-aem-package</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- AEM Stubs -->
+                        <embedded>
+                            <groupId>com.cognifide.aem.stubs</groupId>
+                            <artifactId>stubs-moco-app</artifactId>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <embedded>
+                            <groupId>com.cognifide.aem.stubs</groupId>
+                            <artifactId>stubs-wiremock-app</artifactId>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- ACS AEM Commons -->
+                        <embedded>
+                            <groupId>com.adobe.acs</groupId>
+                            <artifactId>acs-aem-commons-all</artifactId>
+                            <classifier>cloud</classifier>
+                            <type>zip</type>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- Access Control Tool -->
+                        <embedded>
+                            <groupId>biz.netcentric.cq.tools.accesscontroltool</groupId>
+                            <artifactId>accesscontroltool-package</artifactId>
+                            <type>content-package</type>
+                            <classifier>cloud</classifier>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- Open Telemetry -->
+                        <embedded>
+                            <groupId>com.amplexor.aem.opentelemetry</groupId>
+                            <artifactId>aem-opentelemetry.all</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- Smart Redirect Filter -->
+                        <embedded>
+                            <groupId>com.github.ben-manes.caffeine</groupId>
+                            <artifactId>caffeine</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                        <!-- JSoup Parser -->
+                        <embedded>
+                            <groupId>org.jsoup</groupId>
+                            <artifactId>jsoup</artifactId>
+                            <target>/apps/testing-patterns-with-aemaacs-vendor-packages/application/install</target>
+                        </embedded>
+                    </embeddeds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.wcm.maven.plugins</groupId>
+                <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- ====================================================================== -->
+    <!-- P R O F I L E S                                                        -->
+    <!-- ====================================================================== -->
+    <profiles>
+        <profile>
+            <id>autoInstallSinglePackage</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.wcm.maven.plugins</groupId>
+                        <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-package</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                                <configuration>
+                                    <serviceURL>http://${aem.host}:${aem.port}/crx/packmgr/service.jsp</serviceURL>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>autoInstallSinglePackagePublish</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.wcm.maven.plugins</groupId>
+                        <artifactId>wcmio-content-package-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-package-publish</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                                <configuration>
+                                    <serviceURL>http://${aem.publish.host}:${aem.publish.port}/crx/packmgr/service.jsp
+                                    </serviceURL>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>local</id>
+            <activation>
+                <property>
+                    <name>!env.CM_BUILD</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.cognifide.aem.stubs</groupId>
+                    <artifactId>stubs-moco-app</artifactId>
+                    <type>zip</type>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <!-- ====================================================================== -->
+    <!-- D E P E N D E N C I E S                                                -->
+    <!-- ====================================================================== -->
+    <dependencies>
+        <!-- Sling -->
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.models.caconfig</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.contentparser.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.contentparser.json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.dynamic-include</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>be.orbinson.aem</groupId>
+            <artifactId>aem-dictionary-translator.all</artifactId>
+            <type>zip</type>
+        </dependency>
+
+        <!-- WCM.io -->
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.sling.commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.sling.models</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.caconfig.extensions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.caconfig.editor</artifactId>
+            <classifier>bundle</classifier>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.caconfig.editor</artifactId>
+            <classifier>content</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.handler.link</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.wcm.commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.handler.commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.handler.url</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.handler.media</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.wcm.ui.granite</artifactId>
+        </dependency>
+
+        <!-- AEM Easy Content Upgrade and groovy console -->
+        <dependency>
+            <groupId>de.valtech.aecu</groupId>
+            <artifactId>aecu.complete.cloud</artifactId>
+            <type>zip</type>
+        </dependency>
+
+        <!-- Composum -->
+        <dependency>
+            <groupId>com.composum.nodes</groupId>
+            <artifactId>composum-nodes-aem-package</artifactId>
+            <type>zip</type>
+        </dependency>
+
+        <!-- ACS AEM Commons -->
+        <dependency>
+            <groupId>com.adobe.acs</groupId>
+            <artifactId>acs-aem-commons-all</artifactId>
+            <classifier>cloud</classifier>
+            <type>zip</type>
+        </dependency>
+
+        <!-- Access Control Tool -->
+        <dependency>
+            <groupId>biz.netcentric.cq.tools.accesscontroltool</groupId>
+            <artifactId>accesscontroltool-package</artifactId>
+            <classifier>cloud</classifier>
+            <type>content-package</type>
+        </dependency>
+
+        <!-- Open Telemetry -->
+        <dependency>
+            <groupId>com.amplexor.aem.opentelemetry</groupId>
+            <artifactId>aem-opentelemetry.all</artifactId>
+            <type>zip</type>
+        </dependency>
+
+        <!-- Smart Redirect Filter -->
+        <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/caffeine -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        
+        <!-- Stub API's -->
+        <dependency>
+            <groupId>com.cognifide.aem.stubs</groupId>
+            <artifactId>stubs-wiremock-app</artifactId>
+            <type>zip</type>
+        </dependency>
+
+        <!-- JSoup Parser -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
+    </dependencies>
+</project>

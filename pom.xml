@@ -11,6 +11,7 @@
     <description>Testing Patterns With AEMaaCS</description>
     <modules>
         <module>all</module>
+        <module>frameworks</module>
         <module>core</module>
         <module>ui.apps</module>
         <module>ui.apps.structure</module>
