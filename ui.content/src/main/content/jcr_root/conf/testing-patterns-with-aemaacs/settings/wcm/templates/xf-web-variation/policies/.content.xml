@@ -4,6 +4,8 @@
           jcr:primaryType="cq:Page">
     <jcr:content
             cq:policy="testing-patterns-with-aemaacs/components/page/policy"
+            cq:lastReplicated="{Date}2030-01-01T00:00:00.000Z"
+            cq:lastReplicationAction="Activate"
             jcr:primaryType="nt:unstructured"
             sling:resourceType="wcm/core/components/policies/mappings">
         <root

@@ -5,5 +5,7 @@
           jcr:description="Sets a &lt;main&gt; element on the page content area."
           jcr:primaryType="nt:unstructured" jcr:title="Page Main"
           sling:resourceType="wcm/core/components/policy/policy">
-    <jcr:content jcr:primaryType="nt:unstructured"/>
+    <jcr:content jcr:primaryType="nt:unstructured"
+                 cq:lastReplicated="{Date}2030-01-01T00:00:00.000Z"
+                 cq:lastReplicationAction="Activate"/>
 </jcr:root>

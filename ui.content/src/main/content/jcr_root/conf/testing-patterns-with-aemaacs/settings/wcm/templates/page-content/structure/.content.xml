@@ -4,6 +4,8 @@
           jcr:primaryType="cq:Page">
     <jcr:content
             cq:deviceGroups="[mobile/groups/responsive]"
+            cq:lastReplicated="{Date}2030-01-01T00:00:00.000Z"
+            cq:lastReplicationAction="Activate"
             cq:template="/conf/testing-patterns-with-aemaacs/settings/wcm/templates/page-content"
             jcr:primaryType="cq:PageContent"
             sling:resourceType="testing-patterns-with-aemaacs/components/page">

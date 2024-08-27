@@ -322,11 +322,11 @@ Bundle-DocURL:
                             <artifactId>aem-cloud-validator</artifactId>
                             <version>1.3.0</version>
                         </dependency>
-<!--                        <dependency>-->
-<!--                            <groupId>biz.netcentric.filevault.validator</groupId>-->
-<!--                            <artifactId>aem-replication-metadata-validator</artifactId>-->
-<!--                            <version>1.4.0</version>-->
-<!--                        </dependency>-->
+                        <dependency>
+                            <groupId>biz.netcentric.filevault.validator</groupId>
+                            <artifactId>aem-replication-metadata-validator</artifactId>
+                            <version>1.4.0</version>
+                        </dependency>
                     </dependencies>
                 </plugin>
                 <!-- AEM Analyser Plugin -->

@@ -5,7 +5,9 @@
           jcr:description="Allows the page components and defines the component mapping (this configures what components should be automatically created when authors drop assets from the content finder to the page editor)."
           jcr:primaryType="nt:unstructured" jcr:title="Page Content"
           sling:resourceType="wcm/core/components/policy/policy">
-    <jcr:content jcr:primaryType="nt:unstructured"/>
+    <jcr:content jcr:primaryType="nt:unstructured"
+                 cq:lastReplicated="{Date}2030-01-01T00:00:00.000Z"
+                 cq:lastReplicationAction="Activate"/>
     <cq:authoring jcr:primaryType="nt:unstructured">
         <assetToComponentMapping jcr:primaryType="nt:unstructured">
             <mapping_1575030255082 assetGroup="media" assetMimetype="image/*" droptarget="image"
