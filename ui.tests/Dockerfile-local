@@ -9,4 +9,4 @@ WORKDIR ${APP_PATH}
 COPY ./test-module ./
 RUN npm install
 
-CMD npm run test:sanity
+CMD npm run test
