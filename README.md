@@ -1,135 +1,38 @@
-# Sample AEM project template
+# AEM Project Reference - README
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a
-potential starting point to develop your own functionality.
+This project serves as a reference for all changes made to the AEM archetype, showcasing best practices and customizations that enhance the development and testing experience for AEM as a Cloud Service (AEMaaCS).
 
-## Modules
+## Project Overview
 
-The main parts of the template are:
+This reference project is based on the AEM archetype but has been extended to demonstrate various modifications and improvements aimed at optimizing workflows, testing, and deployment for AEMaaCS environments. The changes include custom modules, testing enhancements, and integration with CI/CD tools.
 
-* [core:](core/README.md) Java bundle containing all core functionality like OSGi services, listeners or schedulers, as
-  well as component-related Java code such as servlets or request filters.
-* [it.tests:](it.tests/README.md) Java based integration tests
-* [ui.apps:](ui.apps/README.md) contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components,
-  and templates
-* [ui.content:](ui.content/README.md) contains sample content using the components from the ui.apps
-* ui.config: contains runmode specific OSGi configs for the project
-* [ui.frontend:](ui.frontend.general/README.md) an optional dedicated front-end build mechanism (Angular, React or
-  general Webpack project)
-* [ui.tests.cypress:](ui.tests.cypress/README.md) Cypress based UI tests
-* [ui.tests.wdio:](ui.tests.wdio/README.md) Selenium based UI tests
-* all: a single content package that embeds all of the compiled modules (bundles and content packages) including any
-  vendor dependencies
-* analyse: this module runs analysis on the project which provides additional validation for deploying into AEMaaCS
+## Key Changes from the AEM Archetype
 
-## How to build
+### 1. Custom Modules
+- **`ui.content` Module**: Modified to use the 'replace' filter mode instead of 'merge' to ensure consistent content configuration across all environments. Editable templates are locked to maintain uniformity and prevent manual changes.
+- **`it.content` Module**: Added a dedicated testing module for creating isolated test pages for each component and template, which is used for integration tests and other targeted testing scenarios.
 
-To build all the modules run in the project root directory the following command with Maven 3:
+### 2. Enhanced Testing Suite
+- **Integration Tests**: Integration tests now run both locally and in the Remote Development Environment (RDE), ensuring consistent functionality across multiple stages.
+- **UI Tests**: Utilizes Playwright for fast, multi-browser UI testing with built-in support for accessibility checks.
+- **Lighthouse Tests**: Added to evaluate performance, accessibility, and SEO metrics for each component in real-world conditions.
 
-    mvn clean install
+### 3. CI/CD Integration
+- **Static Code Analysis**: Tools like SpotBugs, PMD, and Checkstyle are used to catch code quality issues early, avoiding disruptions in the Cloud Manager pipeline.
+- **Architecture Rules Testing**: ArchUnit is integrated with the CI/CD pipeline to ensure that architectural consistency is maintained as the project evolves.
+- **Code Coverage**: JaCoCo is used to enforce code coverage requirements, ensuring each part of the codebase is well-tested before deployment.
 
-To build all the modules and deploy the `all` package to a local instance of AEM, run in the project root directory the
-following command:
+## How to Use This Reference
+- **Development Setup**: Clone the repository and set up your local development environment using AEM SDK. Ensure that both `ui.content` and `it.content` modules are deployed locally for a complete testing setup.
+- **Testing**: Run the provided unit, integration, and UI tests to validate changes during development. Use the included Lighthouse tests to evaluate page performance and accessibility.
+- **CI/CD Pipeline**: Follow the examples provided to integrate your CI/CD pipeline with Cloud Manager or other tools. Static analysis, architecture validation, and coverage checks are all automated to maintain code quality.
 
-    mvn clean install -PautoInstallSinglePackage
+## Important Notes
+- This reference project emphasizes maintaining clean and consistent environments across all stages: local, RDE, and DEV. All changes should follow the guidelines demonstrated here to ensure quality and stability.
 
-Or to deploy it to a publish instance, run
+## Contributing
+If you find any issues or have suggestions for further improvements, feel free to open a pull request or create an issue.
 
-    mvn clean install -PautoInstallSinglePackagePublish
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-Or alternatively
-
-    mvn clean install -PautoInstallSinglePackage -Daem.port=4503
-
-Or to deploy only the bundle to the author, run
-
-    mvn clean install -PautoInstallBundle
-
-Or to deploy only a single content package, run in the sub-module directory (i.e `ui.apps`)
-
-    mvn clean install -PautoInstallPackage
-
-## Documentation
-
-The build process also generates documentation in the form of README.md files in each module directory for easy
-reference. Depending on the options you select at build time, the content may be customized to your project.
-
-## Testing
-
-There are three levels of testing contained in the project:
-
-### Unit tests
-
-This show-cases classic unit testing of the code contained in the bundle. To
-test, execute:
-
-    mvn clean test
-
-### Integration tests
-
-This allows running integration tests that exercise the capabilities of AEM via
-HTTP calls to its API. To run the integration tests, run:
-
-    mvn clean verify -Plocal
-
-Test classes must be saved in the `src/main/java` directory (or any of its
-subdirectories), and must be contained in files matching the pattern `*IT.java`.
-
-The configuration provides sensible defaults for a typical local installation of
-AEM. If you want to point the integration tests to different AEM author and
-publish instances, you can use the following system properties via Maven's `-D`
-flag.
-
-| Property              | Description                                         | Default value           |
-|-----------------------|-----------------------------------------------------|-------------------------|
-| `it.author.url`       | URL of the author instance                          | `http://localhost:4502` |
-| `it.author.user`      | Admin user for the author instance                  | `admin`                 |
-| `it.author.password`  | Password of the admin user for the author instance  | `admin`                 |
-| `it.publish.url`      | URL of the publish instance                         | `http://localhost:4503` |
-| `it.publish.user`     | Admin user for the publish instance                 | `admin`                 |
-| `it.publish.password` | Password of the admin user for the publish instance | `admin`                 |
-
-The integration tests in this archetype use the [AEM Testing
-Clients](https://github.com/adobe/aem-testing-clients) and showcase some
-recommended [best
-practices](https://github.com/adobe/aem-testing-clients/wiki/Best-practices) to
-be put in use when writing integration tests for AEM.
-
-## Static Analysis
-
-The `analyse` module performs static analysis on the project for deploying into AEMaaCS. It is automatically
-run when executing
-
-    mvn clean install
-
-from the project root directory. Additional information about this analysis and how to further configure it
-can be found here https://github.com/adobe/aemanalyser-maven-plugin
-
-### UI tests
-
-They will test the UI layer of your AEM application using either Cypress or Selenium technology.
-
-Check README file in `ui.tests.cypress` or `ui.tests.wdio` module for more details.
-
-## ClientLibs
-
-The frontend module is made available using
-an [AEM ClientLib](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/clientlibs.html). When
-executing the NPM build script, the app is built and
-the [`aem-clientlib-generator`](https://github.com/wcm-io-frontend/aem-clientlib-generator) package takes the resulting
-build output and transforms it into such a ClientLib.
-
-A ClientLib will consist of the following files and directories:
-
-- `css/`: CSS files which can be requested in the HTML
-- `css.txt` (tells AEM the order and names of files in `css/` so they can be merged)
-- `js/`: JavaScript files which can be requested in the HTML
-- `js.txt` (tells AEM the order and names of files in `js/` so they can be merged
-- `resources/`: Source maps, non-entrypoint code chunks (resulting from code splitting), static assets (e.g. icons),
-  etc.
-
-## Maven settings
-
-The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
-
-    http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
